@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //Player Control Settings
     [Header("Input (per player)")]
     public KeyCode leftKey = KeyCode.A;
     public KeyCode rightKey = KeyCode.D;
@@ -30,11 +31,11 @@ public class PlayerController : MonoBehaviour
     public float airLinearDrag = 1f;
 
     [Header("Wall Slide / Jump")]
-    public float wallCheckDistance = 0.5f;          // how far to raycast left/right to find a wall
-    public float wallSlideMaxFallSpeed = 3.5f;      // how fast you slide down the wall
-    public Vector2 wallJumpForce = new Vector2(12f, 14f); // x = push away, y = up
-    public float wallJumpControlLock = 0.18f;       // time to ignore horizontal steering after wall jump
-    private float wallJumpTimer; // counts down while steering is locked
+    public float wallCheckDistance = 0.5f;          
+    public float wallSlideMaxFallSpeed = 3.5f;
+    public Vector2 wallJumpForce = new Vector2(5f, 6f);
+    public float wallJumpControlLock = 0.18f;
+    private float wallJumpTimer;
 
     //Audio
     public AudioClip jumpSound;
@@ -70,10 +71,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // --- Ground & Wall checks ---
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        // Use short left/right raycasts to know which side the wall is on.
+        //Use short left/right raycasts to know which side the wall is on.
         wallLeft = Physics2D.Raycast(wallCheck.position, Vector2.left, wallCheckDistance, WallLayer);
         wallRight = Physics2D.Raycast(wallCheck.position, Vector2.right, wallCheckDistance, WallLayer);
         onWall = (wallLeft || wallRight) && !isGrounded;
@@ -81,66 +81,72 @@ public class PlayerController : MonoBehaviour
         Animator1.SetBool("IsGrounded", isGrounded);
         Animator1.SetFloat("YVelocity", rb.velocity.y);
 
-        // --- Build horizontal input (-1,0,+1) ---
+
         int dir = 0;
         if (Input.GetKey(leftKey)) dir -= 1;
         if (Input.GetKey(rightKey)) dir += 1;
         horizontalInput = dir;
 
-        // --- JUMP INPUT ---
+
         if (Input.GetKeyDown(jumpKey))
         {
             if (onWall)
             {
-                // WALL JUMP: push away from the wall
+                //Wall Jump
                 wallJumpTimer = wallJumpControlLock;
-                float away = wallLeft ? 1f : -1f; // jump opposite the wall
+                float away = wallLeft ? 1f : -1f; //Jump opposite the wall
                 rb.velocity = new Vector2(away * wallJumpForce.x, wallJumpForce.y);
 
                 if (playerAudio && jumpSound) playerAudio.PlayOneShot(jumpSound, 0.5f);
                 Animator1.SetTrigger("Jump");
 
-                // small quality-of-life: flip to face away from wall immediately
+                //Small quality of life: flip to face away from wall immediately
                 transform.localScale = new Vector3(away, 1f, 1f);
             }
             else if (coyoteTimeCounter > 0f)
             {
-                // NORMAL JUMP
+                //Normal Jump
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 if (playerAudio && jumpSound) playerAudio.PlayOneShot(jumpSound, 0.5f);
                 Animator1.SetTrigger("Jump");
             }
         }
 
-        // --- Coyote time handling (ground only) ---
-        if (isGrounded) coyoteTimeCounter = coyoteTime;
-        else coyoteTimeCounter -= Time.deltaTime;
+        //Coyote time handling (ground only)
+        if (isGrounded)
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
 
-        // --- Wall slide state (handled here for responsive anims; clamped in FixedUpdate) ---
+        //Wall slide state (handled here for responsive anims; clamped in FixedUpdate)
         isWallSliding = onWall && rb.velocity.y < 0f;
         Animator1.SetBool("IsWallSliding", isWallSliding);
 
-        // decrement control lock timer
+        //Decrement control lock timer
         if (wallJumpTimer > 0f) wallJumpTimer -= Time.deltaTime;
     }
 
     void FixedUpdate()
     {
-        // --- Drag swap ---
+        //Drag swap
         rb.drag = isGrounded ? groundLinearDrag : airLinearDrag;
 
-        // --- Target speed (sprint only on ground) ---
+        //Target speed (sprint only on ground)
         float speedCap = moveSpeed;
         if (isGrounded && Input.GetKey(sprintKey)) speedCap *= sprintMultiplier;
         float targetX = horizontalInput * Mathf.Min(maxSpeed, speedCap);
 
-        // If we just wall-jumped, briefly ignore steering so the launch is clean.
+        //If we just wall-jumped, briefly ignore steering so the launch is clean, otherwise you can just hug the wall and go up
         if (wallJumpTimer > 0f)
         {
-            targetX = rb.velocity.x; // freeze horizontal target during lock
+            targetX = rb.velocity.x; //freeze horizontal target during lock
         }
 
-        // --- Horizontal movement ---
+        //Horizontal movement
         if (isGrounded)
         {
             float newX = Mathf.MoveTowards(rb.velocity.x, targetX, groundAcceleration * Time.fixedDeltaTime);
@@ -157,15 +163,15 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(newX, rb.velocity.y);
         }
 
-        // --- Wall slide vertical clamp ---
+        
         if (isWallSliding)
         {
-            // Limit downward speed while sliding on a wall
+            //Limit downward speed while sliding on a wall
             if (rb.velocity.y < -wallSlideMaxFallSpeed)
                 rb.velocity = new Vector2(rb.velocity.x, -wallSlideMaxFallSpeed);
         }
 
-        // --- Face movement direction (don’t override immediate flip after wall jump) ---
+        //Face movement direction (don’t override immediate flip after wall jump)
         if (wallJumpTimer <= 0f)
         {
             if (horizontalInput > 0f) transform.localScale = new Vector3(1f, 1f, 1f);
