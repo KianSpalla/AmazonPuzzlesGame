@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerTestingControls : MonoBehaviour
 {
     //Player Control Settings
     [Header("Input (per player)")]
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     public float airLinearDrag = 1f;
 
     [Header("Wall Slide / Jump")]
-    public float wallCheckDistance = 0.5f;          
+    public float wallCheckDistance = 0.5f;
     public float wallSlideMaxFallSpeed = 3.5f;
     public Vector2 wallJumpForce = new Vector2(5f, 6f);
     public float wallJumpControlLock = 0.18f;
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
     //Animations
     [Header("Animations")]
-    private Animator PlayerAnimator;
+    private Animator Animator1;
 
     [Header("Coyote Time")]
     public float coyoteTime = 0.15f;
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        PlayerAnimator = GetComponent<Animator>();
+        Animator1 = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         if (!playerAudio) playerAudio = GetComponent<AudioSource>();
         if (!groundCheck) Debug.LogError("groundCheck not assigned to the player controller on " + name);
@@ -78,8 +78,8 @@ public class PlayerController : MonoBehaviour
         wallRight = Physics2D.Raycast(wallCheck.position, Vector2.right, wallCheckDistance, WallLayer);
         onWall = (wallLeft || wallRight) && !isGrounded;
 
-        PlayerAnimator.SetBool("IsGrounded", isGrounded);
-        PlayerAnimator.SetFloat("YVelocity", rb.velocity.y);
+        Animator1.SetBool("IsGrounded", isGrounded);
+        Animator1.SetFloat("YVelocity", rb.velocity.y);
 
 
         int dir = 0;
@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(away * wallJumpForce.x, wallJumpForce.y);
 
                 if (playerAudio && jumpSound) playerAudio.PlayOneShot(jumpSound, 0.5f);
-                PlayerAnimator.SetTrigger("Jump");
+                Animator1.SetTrigger("Jump");
 
                 //Small quality of life: flip to face away from wall immediately
                 transform.localScale = new Vector3(away, 1f, 1f);
@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
                 //Normal Jump
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 if (playerAudio && jumpSound) playerAudio.PlayOneShot(jumpSound, 0.5f);
-                PlayerAnimator.SetTrigger("Jump");
+                Animator1.SetTrigger("Jump");
             }
         }
 
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
 
         //Wall slide state (handled here for responsive anims; clamped in FixedUpdate)
         isWallSliding = onWall && rb.velocity.y < 0f;
-        PlayerAnimator.SetBool("IsWallSliding", isWallSliding);
+        Animator1.SetBool("IsWallSliding", isWallSliding);
 
         //Decrement control lock timer
         if (wallJumpTimer > 0f) wallJumpTimer -= Time.deltaTime;
@@ -163,7 +163,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(newX, rb.velocity.y);
         }
 
-        Debug.Log("Velocity X: " + rb.velocity.x);
+
         if (isWallSliding)
         {
             //Limit downward speed while sliding on a wall
@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour
             else if (horizontalInput < 0f) transform.localScale = new Vector3(-1f, 1f, 1f);
         }
 
-        PlayerAnimator.SetBool("IsGrounded", isGrounded);
-        PlayerAnimator.SetBool("IsRunning", horizontalInput != 0f);
+        Animator1.SetBool("IsGrounded", isGrounded);
+        Animator1.SetBool("IsRunning", horizontalInput != 0f);
     }
 }
