@@ -99,15 +99,18 @@ public class PlayerController : MonoBehaviour
 
                 if (playerAudio && jumpSound) playerAudio.PlayOneShot(jumpSound, 0.5f);
                 PlayerAnimator.SetTrigger("Jump");
-
+               
                 //Small quality of life: flip to face away from wall immediately
                 transform.localScale = new Vector3(away, 1f, 1f);
+
+
             }
             else if (coyoteTimeCounter > 0f)
             {
                 //Normal Jump
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 if (playerAudio && jumpSound) playerAudio.PlayOneShot(jumpSound, 0.5f);
+                PlayerAnimator.SetTrigger("Jump");
                
             }
         }
@@ -180,8 +183,7 @@ public class PlayerController : MonoBehaviour
 
         PlayerAnimator.SetBool("IsGrounded", isGrounded);
         PlayerAnimator.SetBool("IsRunning", horizontalInput != 0f);
-        PlayerAnimator.SetTrigger("Jump");
-        // Add this line to reset it
-        PlayerAnimator.ResetTrigger("Jump");
+        PlayerAnimator.SetFloat("YVelocity", rb.velocity.y);
+        
     }
 }
