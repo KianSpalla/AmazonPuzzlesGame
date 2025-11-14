@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
                 //Normal Jump
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 if (playerAudio && jumpSound) playerAudio.PlayOneShot(jumpSound, 0.5f);
-                PlayerAnimator.SetTrigger("Jump");
+               
             }
         }
 
@@ -180,5 +180,8 @@ public class PlayerController : MonoBehaviour
 
         PlayerAnimator.SetBool("IsGrounded", isGrounded);
         PlayerAnimator.SetBool("IsRunning", horizontalInput != 0f);
+        PlayerAnimator.SetTrigger("Jump");
+        // Add this line to reset it
+        PlayerAnimator.ResetTrigger("Jump");
     }
 }
