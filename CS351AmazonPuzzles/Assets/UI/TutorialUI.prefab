@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 324691080395360471}
   - component: {fileID: 2663062978222431328}
   - component: {fileID: 4610550712463184462}
+  - component: {fileID: 976604208}
   m_Layer: 5
   m_Name: CountDownTimer
   m_TagString: Untagged
@@ -92,6 +93,26 @@ MonoBehaviour:
   label: {fileID: 2644404333458325190}
   panel: {fileID: 2515125001945175323}
   waitForPanel: {fileID: 4153584120372324424}
+  seconds: 3
+  stepDelay: 1
+  audioSource: {fileID: 0}
+  beepClip: {fileID: 0}
+  goClip: {fileID: 0}
+--- !u!114 &976604208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2515125001945175323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2f210f6cc8851246ab1120c4752182e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: {fileID: 2644404333458325190}
+  panel: {fileID: 2515125001945175323}
+  waitForPanel: {fileID: 7491183318908467258}
   seconds: 3
   stepDelay: 1
   audioSource: {fileID: 0}
@@ -342,7 +363,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4153584120372324426}
-  - component: {fileID: 1616905101986308561}
+  - component: {fileID: 1546152239}
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
@@ -364,7 +385,7 @@ Transform:
   m_Father: {fileID: 7491183318908467259}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1616905101986308561
+--- !u!114 &1546152239
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -377,8 +398,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textbox: {fileID: 7491183318961868636}
-  sentences: []
-  typingSpeed: 0.03
+  sentences:
+  - Use <color=#00C1FF>A & D Keys for Player1</color> and <color=#FF0000>L & ' for
+    Player2</color> to move left and right.
+  - Use <color=#00C1FF>W Key for Player1</color> and <color=#FF0000>P for Player2</color>
+    to jump.
+  - Use <color=#00C1FF>LeftShift for Player1</color> and <color=#FF0000>RightShift
+    for Player2</color> to sprint.
+  - Use <color=#00C1FF>E Key for Player1</color> and <color=#FF0000>O for Player2</color>
+    to interact.
+  - Throughout the level you can jump on certain walls
+  - Work together so both players get to the end flagpole to win!
+  typingSpeed: 0.01
   continueButton: {fileID: 7491183317899318394}
   dialoguePanel: {fileID: 7491183318908467258}
 --- !u!1 &8006759520945638888
@@ -649,7 +680,7 @@ PrefabInstance:
     - target: {fileID: 6796628146169437308, guid: 7a2f6d8f8ef545f4eb2807ebad3e2208, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1616905101986308561}
+      objectReference: {fileID: 1546152239}
     - target: {fileID: 6796628146169437308, guid: 7a2f6d8f8ef545f4eb2807ebad3e2208, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: NextSentence
@@ -667,8 +698,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6796628146169437311, guid: 7a2f6d8f8ef545f4eb2807ebad3e2208, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 233.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796628146169437311, guid: 7a2f6d8f8ef545f4eb2807ebad3e2208, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -83.146
+      value: -92.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a2f6d8f8ef545f4eb2807ebad3e2208, type: 3}

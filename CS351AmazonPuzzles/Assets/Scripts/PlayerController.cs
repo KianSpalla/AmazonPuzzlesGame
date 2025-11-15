@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     //Audio
     public AudioClip jumpSound;
-    public AudioSource playerAudio;
+    private AudioSource playerAudio;
 
     //Internals
     private Rigidbody2D rb;
