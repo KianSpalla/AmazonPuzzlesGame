@@ -69,6 +69,31 @@ public class PlayerController : MonoBehaviour
         if (!rb) Debug.LogError("Rigidbody2D missing on " + name);
     }
 
+    private void ProcessWallSlide()
+    {
+        bool pressingTowardsWall =
+            (wallLeft && horizontalInput < 0) ||
+            (wallRight && horizontalInput > 0);
+
+        if (!isGrounded && onWall && pressingTowardsWall)
+        {
+            isWallSliding = true;
+
+            // Clamp downward velocity
+            if (rb.velocity.y < -wallSlideMaxFallSpeed)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, -wallSlideMaxFallSpeed);
+            }
+        }
+        else
+        {
+            isWallSliding = false;
+        }
+
+        // Update Animator
+        PlayerAnimator.SetBool("IsWallSliding", isWallSliding);
+    }
+
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
@@ -92,31 +117,30 @@ public class PlayerController : MonoBehaviour
         {
             if (onWall)
             {
-                //Wall Jump
+                // Wall Jump
                 wallJumpTimer = wallJumpControlLock;
-                float away = wallLeft ? 1f : -1f; //Jump opposite the wall
+                float away = wallLeft ? 1f : -1f;
                 rb.velocity = new Vector2(away * wallJumpForce.x, wallJumpForce.y);
 
-                if (playerAudio && jumpSound) playerAudio.PlayOneShot(jumpSound, 0.5f);
-                PlayerAnimator.SetTrigger("Jump");
-               
-                //Small quality of life: flip to face away from wall immediately
+
+                
+                PlayerAnimator.SetTrigger("WallJump");
+
                 transform.localScale = new Vector3(away, 1f, 1f);
-
-
             }
             else if (coyoteTimeCounter > 0f)
             {
-                //Normal Jump
+                
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 if (playerAudio && jumpSound) playerAudio.PlayOneShot(jumpSound, 0.5f);
-                PlayerAnimator.SetTrigger("Jump");
-               
+
+             
+
             }
         }
 
-        //Coyote time handling (ground only)
-        if (isGrounded)
+            //Coyote time handling (ground only)
+            if (isGrounded)
         {
             coyoteTimeCounter = coyoteTime;
         }
@@ -126,8 +150,10 @@ public class PlayerController : MonoBehaviour
         }
 
         //Wall slide state (handled here for responsive anims; clamped in FixedUpdate)
-        isWallSliding = onWall && rb.velocity.y < 0f;
-        PlayerAnimator.SetBool("IsWallSliding", isWallSliding);
+
+        ProcessWallSlide();
+
+        Debug.Log("WallLeft: " + wallLeft + " WallRight: " + wallRight + " Input: " + horizontalInput);
 
         //Decrement control lock timer
         if (wallJumpTimer > 0f) wallJumpTimer -= Time.deltaTime;
