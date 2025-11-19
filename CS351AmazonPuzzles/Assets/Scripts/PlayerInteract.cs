@@ -5,8 +5,6 @@ using UnityEngine;
 public interface IInteractable
 {
     void Interact();
-    // Optional, if you want prompts later:
-    // string GetPromptText();
 }
 public class PlayerInteract : MonoBehaviour
 {

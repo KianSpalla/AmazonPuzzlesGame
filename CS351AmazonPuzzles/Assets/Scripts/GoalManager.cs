@@ -20,12 +20,16 @@ public class GoalManager : MonoBehaviour
     private bool player1InGoal;
     private bool player2InGoal;
 
+    private AudioSource audioSource;
+    public AudioClip WinSound;
+
     void Start()
     {
         gameOver = false;
         winnerName = "";
         player1InGoal = false;
         player2InGoal = false;
+        audioSource = GetComponent<AudioSource>();
         Time.timeScale = 1f; // ensure unfrozen when scene starts
     }
 
@@ -37,6 +41,7 @@ public class GoalManager : MonoBehaviour
             if (player1InGoal && player2InGoal)
             {
                 // Both players reached the goal → level complete
+                audioSource.PlayOneShot(WinSound);
                 DeclareWinner("Both Players");
             }
             return;
