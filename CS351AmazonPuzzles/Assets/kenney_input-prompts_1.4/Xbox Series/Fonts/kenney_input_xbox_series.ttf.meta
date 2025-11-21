@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: a4629b7c6c483e44db850b06f14c48bf
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Kenney Input Xbox Series
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: a30f132264eb541448414d57280699fe, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

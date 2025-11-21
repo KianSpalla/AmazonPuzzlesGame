@@ -240,7 +240,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.75686276, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -304,7 +304,7 @@ MonoBehaviour:
   jumpKey: 119
   sprintKey: 304
   moveSpeed: 5
-  jumpForce: 10
+  jumpForce: 13
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -318,14 +318,18 @@ MonoBehaviour:
   maxSpeed: 8
   groundAcceleration: 60
   airAcceleration: 20
-  groundLinearDrag: 8
-  airLinearDrag: 1
+  groundLinearDrag: 5
+  airLinearDrag: 0
   wallCheckDistance: 0.5
   wallSlideMaxFallSpeed: 3.5
-  wallJumpForce: {x: 12, y: 14}
+  wallJumpForce: {x: 5, y: 8}
   wallJumpControlLock: 0.18
-  jumpSound: {fileID: 0}
-  playerAudio: {fileID: 0}
+  normalGravityScale: 2
+  lowJumpGravityScale: 3
+  fallGravityScale: 3
+  apexThreshold: 0.1
+  jumpCutMultiplier: 0.5
+  jumpSound: {fileID: 8300000, guid: 7f7c5b2bb7ece664d83d2299cf555e22, type: 3}
   coyoteTime: 0.15
 --- !u!95 &7024310910105167922
 Animator:
@@ -456,7 +460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13859283f02dc1440a946de46cb10b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lowestY: -20
+  lowestY: -15
 --- !u!114 &7178757675729803597
 MonoBehaviour:
   m_ObjectHideFlags: 0

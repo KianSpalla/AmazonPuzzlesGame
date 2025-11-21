@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: bd141e753b610a04ab000942a7e96ac2
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Kenney Input Steam Deck
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 20ee4a6837e0a414fb25efdd030fbf47, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
