@@ -31,11 +31,23 @@ public class PlayerController : MonoBehaviour
     public float airLinearDrag = 1f;
 
     [Header("Wall Slide / Jump")]
-    public float wallCheckDistance = 0.5f;          
+    public float wallCheckDistance = 0.5f;
     public float wallSlideMaxFallSpeed = 3.5f;
     public Vector2 wallJumpForce = new Vector2(5f, 6f);
     public float wallJumpControlLock = 0.18f;
     private float wallJumpTimer;
+
+    // Better jump / gravity tuning
+    [Header("Better Jump / Gravity")]
+    public float normalGravityScale = 3f;      // gravity while rising & holding jump
+    public float lowJumpGravityScale = 5f;     // gravity while rising but jump released
+    public float fallGravityScale = 6f;        // gravity while falling
+    public float apexThreshold = 0.1f;
+
+    // NEW (velocity cut): shorten jump immediately on release
+    [Header("Variable Jump (Velocity Cut)")]
+    [Range(0f, 1f)]
+    public float jumpCutMultiplier = 0.5f;     // 0.5 = cut upward speed in half when jump is released
 
     //Audio
     public AudioClip jumpSound;
@@ -50,6 +62,9 @@ public class PlayerController : MonoBehaviour
     private bool isWallSliding;
     private float horizontalInput;
     private bool isSlowed = false;
+
+    // track jump held state for gravity logic
+    private bool jumpHeld;
 
     //Animations
     [Header("Animations")]
@@ -67,6 +82,12 @@ public class PlayerController : MonoBehaviour
         if (!groundCheck) Debug.LogError("groundCheck not assigned to the player controller on " + name);
         if (!wallCheck) Debug.LogError("wallCheck not assigned to the player controller on " + name);
         if (!rb) Debug.LogError("Rigidbody2D missing on " + name);
+
+        // initialize Rigidbody2D gravityScale from our normal setting
+        if (rb != null)
+        {
+            rb.gravityScale = normalGravityScale;
+        }
     }
 
     private void ProcessWallSlide()
@@ -106,13 +127,15 @@ public class PlayerController : MonoBehaviour
         PlayerAnimator.SetBool("IsGrounded", isGrounded);
         PlayerAnimator.SetFloat("YVelocity", rb.velocity.y);
 
-
         int dir = 0;
         if (Input.GetKey(leftKey)) dir -= 1;
         if (Input.GetKey(rightKey)) dir += 1;
         horizontalInput = dir;
 
+        // track whether jump is currently held (for gravity logic)
+        jumpHeld = Input.GetKey(jumpKey);
 
+        // JUMP PRESS
         if (Input.GetKeyDown(jumpKey))
         {
             if (onWall)
@@ -122,10 +145,17 @@ public class PlayerController : MonoBehaviour
                 float away = wallLeft ? 1f : -1f;
                 rb.velocity = new Vector2(away * wallJumpForce.x, wallJumpForce.y);
 
+//<<<<<<< Updated upstream
 
                 
                 PlayerAnimator.SetTrigger("WallJump");
 
+//=======
+                if (playerAudio && jumpSound) playerAudio.PlayOneShot(jumpSound, 0.5f);
+                PlayerAnimator.SetTrigger("Jump");
+
+                //Small quality of life: flip to face away from wall immediately
+//>>>>>>> Stashed changes
                 transform.localScale = new Vector3(away, 1f, 1f);
             }
             else if (coyoteTimeCounter > 0f)
@@ -133,9 +163,26 @@ public class PlayerController : MonoBehaviour
                 
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 if (playerAudio && jumpSound) playerAudio.PlayOneShot(jumpSound, 0.5f);
+//<<<<<<< Updated upstream
 
              
 
+//=======
+                PlayerAnimator.SetTrigger("Jump");
+            }
+        }
+
+        // NEW (velocity cut): JUMP RELEASE
+        if (Input.GetKeyUp(jumpKey))
+        {
+            // Only cut while still moving up; don't touch downward motion
+            if (rb.velocity.y > 0f)
+            {
+                rb.velocity = new Vector2(
+                    rb.velocity.x,
+                    rb.velocity.y * jumpCutMultiplier
+                );
+//>>>>>>> Stashed changes
             }
         }
 
@@ -200,6 +247,39 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, -wallSlideMaxFallSpeed);
         }
 
+        // Better jump gravity logic (skip when wall-sliding so your clamp stays in control)
+        if (!isWallSliding && !isGrounded)
+        {
+            float vy = rb.velocity.y;
+
+            // Treat near-zero vertical speed as "top of jump" and already falling
+            if (vy <= apexThreshold)
+            {
+                // Falling or at apex: use strong fall gravity
+                rb.gravityScale = fallGravityScale;
+            }
+            else
+            {
+                // Clearly going up
+                if (jumpHeld)
+                {
+                    // Holding jump: higher, floatier full jump
+                    rb.gravityScale = normalGravityScale;
+                }
+                else
+                {
+                    // Released jump while rising: cut jump short
+                    rb.gravityScale = lowJumpGravityScale;
+                }
+            }
+        }
+        else
+        {
+            // On ground or wall-sliding: keep gravity stable
+            rb.gravityScale = normalGravityScale;
+        }
+
+
         //Face movement direction (don’t override immediate flip after wall jump)
         if (wallJumpTimer <= 0f)
         {
@@ -210,6 +290,5 @@ public class PlayerController : MonoBehaviour
         PlayerAnimator.SetBool("IsGrounded", isGrounded);
         PlayerAnimator.SetBool("IsRunning", horizontalInput != 0f);
         PlayerAnimator.SetFloat("YVelocity", rb.velocity.y);
-        
     }
 }
