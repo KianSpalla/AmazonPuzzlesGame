@@ -61,6 +61,8 @@ public class PlayerController : MonoBehaviour
     public float coyoteTime = 0.15f;
     private float coyoteTimeCounter;
 
+
+
     void Start()
     {
         Animator1 = GetComponent<Animator>();
@@ -70,6 +72,13 @@ public class PlayerController : MonoBehaviour
         if (!wallCheck) Debug.LogError("wallCheck not assigned to the player controller on " + name);
         if (!rb) Debug.LogError("Rigidbody2D missing on " + name);
     }
+
+    private IEnumerator FlipAfterWallJump(float away)
+    {
+        yield return null; // wait 1 frame
+        transform.localScale = new Vector3(away, 1f, 1f);
+    }
+    
 
     void Update()
     {
@@ -95,16 +104,19 @@ public class PlayerController : MonoBehaviour
         {
             if (onWall)
             {
-                // WALL JUMP: push away from the wall
-                wallJumpTimer = wallJumpControlLock;
-                float away = wallLeft ? 1f : -1f; // jump opposite the wall
-                rb.velocity = new Vector2(away * wallJumpForce.x, wallJumpForce.y);
+                
+                    DoWallJump();
+                
+                bool facingRight = transform.localScale.x > 0f;
+                bool facingLeft = !facingRight;
 
-                if (playerAudio && jumpSound) playerAudio.PlayOneShot(jumpSound, 0.5f);
-                Animator1.SetTrigger("Jump");
-
-                // small quality-of-life: flip to face away from wall immediately
-                transform.localScale = new Vector3(away, 1f, 1f);
+                // VALID if:
+                // - on left wall AND facing left
+                // - on right wall AND facing right
+                if ((wallLeft && facingLeft) || (wallRight && facingRight))
+                {
+                    DoWallJump();
+                }
             }
             else if (coyoteTimeCounter > 0f)
             {
@@ -125,6 +137,19 @@ public class PlayerController : MonoBehaviour
 
         // decrement control lock timer
         if (wallJumpTimer > 0f) wallJumpTimer -= Time.deltaTime;
+    }
+
+    void DoWallJump()
+    {
+        wallJumpTimer = wallJumpControlLock;
+
+        float facing = transform.localScale.x; // +1 or -1
+        float away = -facing; // jump opposite direction of where you're facing
+
+        rb.velocity = new Vector2(away * wallJumpForce.x, wallJumpForce.y);
+
+        Animator1.SetTrigger("Jump");
+        StartCoroutine(FlipAfterWallJump(away));
     }
 
     void FixedUpdate()
