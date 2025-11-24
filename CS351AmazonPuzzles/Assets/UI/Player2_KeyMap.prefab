@@ -381,7 +381,11 @@ MonoBehaviour:
     key: 108
     image: {fileID: 6653919412461851822}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     idleSprite: {fileID: 21300000, guid: 8a78b4a7c1c085b4e80f6b2ba007a51b, type: 3}
+=======
+    idleSprite: {fileID: 21300000, guid: 913d01efbfc8ce040a37a85a0bacef6c, type: 3}
+>>>>>>> Stashed changes
 =======
     idleSprite: {fileID: 21300000, guid: 913d01efbfc8ce040a37a85a0bacef6c, type: 3}
 >>>>>>> Stashed changes
