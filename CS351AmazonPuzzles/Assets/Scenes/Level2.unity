@@ -327,6 +327,7 @@ GameObject:
   - component: {fileID: 139023195}
   - component: {fileID: 139023194}
   - component: {fileID: 139023193}
+  - component: {fileID: 139023198}
   m_Layer: 3
   m_Name: Door2
   m_TagString: Untagged
@@ -366,10 +367,13 @@ MonoBehaviour:
   doorCollider: {fileID: 139023193}
   tilemap: {fileID: 139023196}
   useTimedMode: 1
-  openDuration: 5
+  openDuration: 4
   startOpen: 1
   closedAlpha: 1
   openAlpha: 0.3
+  audioSource: {fileID: 139023198}
+  openSound: {fileID: 8300000, guid: 73fc4aa810f6f35479a8c3dacc6d715d, type: 3}
+  closeSound: {fileID: 0}
 --- !u!483693784 &139023195
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -642,6 +646,102 @@ Transform:
   m_Father: {fileID: 382121396}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &139023198
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139023192}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &167196113
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,6 +755,7 @@ GameObject:
   - component: {fileID: 167196117}
   - component: {fileID: 167196116}
   - component: {fileID: 167196115}
+  - component: {fileID: 167196119}
   m_Layer: 3
   m_Name: Door1
   m_TagString: Untagged
@@ -708,10 +809,13 @@ MonoBehaviour:
   doorCollider: {fileID: 167196115}
   tilemap: {fileID: 167196118}
   useTimedMode: 1
-  openDuration: 5
+  openDuration: 4
   startOpen: 1
   closedAlpha: 1
   openAlpha: 0.3
+  audioSource: {fileID: 167196119}
+  openSound: {fileID: 8300000, guid: 73fc4aa810f6f35479a8c3dacc6d715d, type: 3}
+  closeSound: {fileID: 0}
 --- !u!483693784 &167196117
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -970,6 +1074,102 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!82 &167196119
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167196113}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &382121394
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,6 +1267,10 @@ PrefabInstance:
       propertyPath: groundAcceleration
       value: 80
       objectReference: {fileID: 0}
+    - target: {fileID: 1339599030092685908, guid: add430cef2a46b749b1c8c2a2965939b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0ccd2b99e9b547b498330df9c7104170, type: 3}
     - target: {fileID: 1339599030092685911, guid: add430cef2a46b749b1c8c2a2965939b, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -1111,6 +1315,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1339599030092685913, guid: add430cef2a46b749b1c8c2a2965939b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 99a27132e267830449a742c9c8e9ebbe, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: add430cef2a46b749b1c8c2a2965939b, type: 3}
 --- !u!1 &899187288
@@ -3336,6 +3544,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7024310910105167922, guid: 2c3fbacf9f62370409388112600de1b3, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 99a27132e267830449a742c9c8e9ebbe, type: 2}
     - target: {fileID: 7024310910105167928, guid: 2c3fbacf9f62370409388112600de1b3, type: 3}
       propertyPath: airAcceleration
       value: 80
@@ -3398,6 +3610,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7024310910105167932, guid: 2c3fbacf9f62370409388112600de1b3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7024310910105167935, guid: 2c3fbacf9f62370409388112600de1b3, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7024310910105167935, guid: 2c3fbacf9f62370409388112600de1b3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0ccd2b99e9b547b498330df9c7104170, type: 3}
+    - target: {fileID: 7024310910105167935, guid: 2c3fbacf9f62370409388112600de1b3, type: 3}
+      propertyPath: m_SpriteSortPoint
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

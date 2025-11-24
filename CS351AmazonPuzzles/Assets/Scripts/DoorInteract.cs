@@ -27,8 +27,12 @@ public class DoorInteract : MonoBehaviour, IActivatable
     [Range(0f, 1f)]
     public float openAlpha = 0.3f;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
     private bool isOpen;
     private Coroutine openRoutine;
+    public AudioClip openSound;
+    public AudioClip closeSound;
 
     private void Awake()
     {
@@ -103,6 +107,15 @@ public class DoorInteract : MonoBehaviour, IActivatable
             var color = tilemap.color;
             color.a = isOpen ? openAlpha : closedAlpha;
             tilemap.color = color;
+        }
+
+        // Play sound
+        if (!isInitialSetup && audioSource != null)
+        {
+            if (isOpen && openSound != null)
+                audioSource.PlayOneShot(openSound);
+            else if (!isOpen && closeSound != null)
+                audioSource.PlayOneShot(closeSound);
         }
 
         if (!isInitialSetup)
