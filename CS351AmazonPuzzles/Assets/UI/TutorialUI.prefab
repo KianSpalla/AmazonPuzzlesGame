@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2297089956501136939
 RectTransform:
   m_ObjectHideFlags: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   label: {fileID: 2644404333458325190}
   panel: {fileID: 2515125001945175323}
-  waitForPanel: {fileID: 4153584120372324424}
+  waitForPanel: {fileID: 0}
   seconds: 3
   stepDelay: 1
   audioSource: {fileID: 0}
@@ -354,64 +354,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &4153584120372324424
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4153584120372324426}
-  - component: {fileID: 1546152239}
-  m_Layer: 0
-  m_Name: DialogueManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4153584120372324426
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4153584120372324424}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -716.2295, y: 84.686714, z: -4.0088553}
-  m_LocalScale: {x: -0.7833538, y: 0.7833538, z: 0.7833538}
-  m_Children: []
-  m_Father: {fileID: 7491183318908467259}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1546152239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4153584120372324424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f474d6bffff7bae4083ca453832d0d9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textbox: {fileID: 7491183318961868636}
-  sentences:
-  - Use <color=#00C1FF>A & D Keys for Player1</color> and <color=#FF0000>L & ' for
-    Player2</color> to move left and right.
-  - Use <color=#00C1FF>W Key for Player1</color> and <color=#FF0000>P for Player2</color>
-    to jump.
-  - Use <color=#00C1FF>LeftShift for Player1</color> and <color=#FF0000>RightShift
-    for Player2</color> to sprint.
-  - Use <color=#00C1FF>E Key for Player1</color> and <color=#FF0000>O for Player2</color>
-    to interact.
-  - Throughout the level you can jump on certain walls
-  - Work together so both players get to the end flagpole to win!
-  typingSpeed: 0.01
-  continueButton: {fileID: 7491183317899318394}
-  dialoguePanel: {fileID: 7491183318908467258}
 --- !u!1 &8006759520945638888
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,13 +495,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4153584119597276628}
     m_Modifications:
+    - target: {fileID: 1757115030, guid: 7a2f6d8f8ef545f4eb2807ebad3e2208, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6796628144490000444, guid: 7a2f6d8f8ef545f4eb2807ebad3e2208, type: 3}
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6796628144490000446, guid: 7a2f6d8f8ef545f4eb2807ebad3e2208, type: 3}
       propertyPath: m_Name
-      value: DialoguePanel
+      value: DialoguePanel1
       objectReference: {fileID: 0}
     - target: {fileID: 6796628144490000446, guid: 7a2f6d8f8ef545f4eb2807ebad3e2208, type: 3}
       propertyPath: m_IsActive
@@ -680,7 +626,7 @@ PrefabInstance:
     - target: {fileID: 6796628146169437308, guid: 7a2f6d8f8ef545f4eb2807ebad3e2208, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1546152239}
+      objectReference: {fileID: 0}
     - target: {fileID: 6796628146169437308, guid: 7a2f6d8f8ef545f4eb2807ebad3e2208, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: NextSentence
@@ -705,6 +651,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -92.9
       objectReference: {fileID: 0}
+    - target: {fileID: 7768741073531537740, guid: 7a2f6d8f8ef545f4eb2807ebad3e2208, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a2f6d8f8ef545f4eb2807ebad3e2208, type: 3}
 --- !u!1 &7491183318908467258 stripped
@@ -715,21 +665,5 @@ GameObject:
 --- !u!224 &7491183318908467259 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6796628144490000447, guid: 7a2f6d8f8ef545f4eb2807ebad3e2208, type: 3}
-  m_PrefabInstance: {fileID: 4153584120789813252}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7491183318961868636 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6796628145088530264, guid: 7a2f6d8f8ef545f4eb2807ebad3e2208, type: 3}
-  m_PrefabInstance: {fileID: 4153584120789813252}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &7491183317899318394 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6796628146169437310, guid: 7a2f6d8f8ef545f4eb2807ebad3e2208, type: 3}
   m_PrefabInstance: {fileID: 4153584120789813252}
   m_PrefabAsset: {fileID: 0}

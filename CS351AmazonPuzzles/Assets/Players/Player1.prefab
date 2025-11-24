@@ -303,8 +303,8 @@ MonoBehaviour:
   rightKey: 100
   jumpKey: 119
   sprintKey: 304
-  moveSpeed: 5
-  jumpForce: 13
+  moveSpeed: 8
+  jumpForce: 15
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -322,7 +322,7 @@ MonoBehaviour:
   airLinearDrag: 0
   wallCheckDistance: 0.5
   wallSlideMaxFallSpeed: 3.5
-  wallJumpForce: {x: 5, y: 8}
+  wallJumpForce: {x: 5, y: 10}
   wallJumpControlLock: 0.18
   normalGravityScale: 2
   lowJumpGravityScale: 3
@@ -330,6 +330,7 @@ MonoBehaviour:
   apexThreshold: 0.1
   jumpCutMultiplier: 0.5
   jumpSound: {fileID: 8300000, guid: 7f7c5b2bb7ece664d83d2299cf555e22, type: 3}
+  playerAudio: {fileID: 0}
   coyoteTime: 0.15
 --- !u!95 &7024310910105167922
 Animator:
