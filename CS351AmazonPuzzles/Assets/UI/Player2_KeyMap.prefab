@@ -380,7 +380,7 @@ MonoBehaviour:
   - name: A
     key: 108
     image: {fileID: 6653919412461851822}
-    idleSprite: {fileID: 21300000, guid: 913d01efbfc8ce040a37a85a0bacef6c, type: 3}
+    idleSprite: {fileID: 21300000, guid: 8a78b4a7c1c085b4e80f6b2ba007a51b, type: 3}
     pressedSprite: {fileID: 21300000, guid: 0256beba3a1defb438f22278995b0717, type: 3}
     idleColor: {r: 1, g: 1, b: 1, a: 1}
     pressedColor: {r: 1, g: 1, b: 1, a: 1}
