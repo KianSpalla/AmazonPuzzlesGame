@@ -78,7 +78,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1339599029870379455
 Transform:
   m_ObjectHideFlags: 0
@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 688194991569683797}
   m_Layer: 0
   m_Name: Player2
-  m_TagString: Player
+  m_TagString: Player2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -298,9 +298,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d81d37ba968f9444eaf09411b5a0405e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftKey: 108
-  rightKey: 39
-  jumpKey: 112
+  leftKey: 276
+  rightKey: 275
+  jumpKey: 273
   sprintKey: 303
   moveSpeed: 8
   jumpForce: 15
@@ -315,9 +315,9 @@ MonoBehaviour:
   groundCheckRadius: 0.2
   sprintMultiplier: 1.5
   maxSpeed: 8
-  groundAcceleration: 60
-  airAcceleration: 20
-  groundLinearDrag: 5
+  groundAcceleration: 80
+  airAcceleration: 80
+  groundLinearDrag: 0
   airLinearDrag: 0
   wallCheckDistance: 0.5
   wallSlideMaxFallSpeed: 3.5
@@ -328,6 +328,8 @@ MonoBehaviour:
   fallGravityScale: 3
   apexThreshold: 0.1
   jumpCutMultiplier: 0.5
+  maxJumps: 1
+  doubleJumpForce: 12
   jumpSound: {fileID: 8300000, guid: 7f7c5b2bb7ece664d83d2299cf555e22, type: 3}
   playerAudio: {fileID: 0}
   coyoteTime: 0.15
@@ -473,4 +475,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b3cc6cdc0e0bf4f9c696703a16a0de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactKey: 111
+  interactKey: 305

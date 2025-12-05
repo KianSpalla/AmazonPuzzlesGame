@@ -45,6 +45,13 @@ public class PlayerController : MonoBehaviour
     [Range(0f, 1f)]
     public float jumpCutMultiplier = 0.5f;
 
+    [Header("Double Jump")]
+    public int maxJumps = 1;
+    private int jumpsRemaining;
+    public float doubleJumpForce = 9f;
+
+
+
     [Header("Audio")]
     public AudioClip jumpSound;
     public AudioSource playerAudio;
@@ -76,12 +83,21 @@ public class PlayerController : MonoBehaviour
         if (!groundCheck) Debug.LogError("groundCheck not assigned on " + name);
         if (!wallCheck) Debug.LogError("wallCheck not assigned on " + name);
         if (!rb) Debug.LogError("Rigidbody2D missing on " + name);
+        jumpsRemaining = maxJumps;
+
     }
 
     private IEnumerator FlipAfterWallJump(float away)
     {
         yield return null;
         transform.localScale = new Vector3(away, 1f, 1f);
+    }
+
+    void PerformJump(float force)
+    {
+        rb.velocity = new Vector2(rb.velocity.x, force);
+        if (playerAudio && jumpSound) playerAudio.PlayOneShot(jumpSound, 0.5f);
+        Animator1.SetTrigger("Jump");
     }
 
     void Update()
@@ -103,19 +119,33 @@ public class PlayerController : MonoBehaviour
         jumpHeld = Input.GetKey(jumpKey);
 
         // --- Jump Press ---
+        // --- Jump Press ---
         if (Input.GetKeyDown(jumpKey))
         {
             if (onWall)
             {
                 DoWallJump();
+                // Optional: after a wall jump, allow one extra jump in air
+                jumpsRemaining = Mathf.Max(jumpsRemaining, maxJumps - 1);
             }
-            else if (coyoteTimeCounter > 0f)
+            else
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                if (playerAudio && jumpSound) playerAudio.PlayOneShot(jumpSound, 0.5f);
-                Animator1.SetTrigger("Jump");
+                // Ground / coyote jump
+                if (coyoteTimeCounter > 0f)
+                {
+                    PerformJump(jumpForce);
+                    coyoteTimeCounter = 0f;
+                    jumpsRemaining = maxJumps - 1; // you already used the first jump
+                }
+                // Air jump (double jump)
+                else if (jumpsRemaining > 0)
+                {
+                    PerformJump(doubleJumpForce);
+                    jumpsRemaining--;
+                }
             }
         }
+
 
         // --- Jump Release ---
         if (Input.GetKeyUp(jumpKey) && rb.velocity.y > 0f)
@@ -124,8 +154,16 @@ public class PlayerController : MonoBehaviour
         }
 
         // --- Coyote time ---
-        if (isGrounded) coyoteTimeCounter = coyoteTime;
-        else coyoteTimeCounter -= Time.deltaTime;
+        if (isGrounded)
+        {
+            coyoteTimeCounter = coyoteTime;
+            jumpsRemaining = maxJumps;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
 
         // --- Wall slide state ---
         isWallSliding = onWall && rb.velocity.y < 0f;

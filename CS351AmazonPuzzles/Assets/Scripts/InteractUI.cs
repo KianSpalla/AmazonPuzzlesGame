@@ -12,7 +12,7 @@ public class InteractUI : MonoBehaviour
 
     [Header("Key Bindings")]
     public KeyCode player1Key = KeyCode.E;
-    public KeyCode player2Key = KeyCode.O;
+    public KeyCode player2Key = KeyCode.RightControl;
 
     private bool player1InRange = false;
     private bool player2InRange = false;

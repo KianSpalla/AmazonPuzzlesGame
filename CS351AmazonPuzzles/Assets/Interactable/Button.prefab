@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f5f1d369db7dabd479ba556b869562b8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7db623ca1a2b8c74ebb143250240ef9c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -447,7 +447,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8b5b75d1c0a92c44bb30767135d4665a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 89a8592edb5b298469b8d8062c814c63, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -507,7 +507,7 @@ MonoBehaviour:
   player1IconPressed: {fileID: 5879509229599248647}
   player2IconPressed: {fileID: 5150341782746651044}
   player1Key: 101
-  player2Key: 111
+  player2Key: 305
 --- !u!61 &2617553042580725656
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -78,7 +78,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7024310909798976468
 Transform:
   m_ObjectHideFlags: 0
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 6809486030220842244}
   m_Layer: 0
   m_Name: Player1
-  m_TagString: Player
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -303,7 +303,7 @@ MonoBehaviour:
   rightKey: 100
   jumpKey: 119
   sprintKey: 304
-  moveSpeed: 8
+  moveSpeed: 10
   jumpForce: 15
   groundLayer:
     serializedVersion: 2
@@ -314,11 +314,11 @@ MonoBehaviour:
     m_Bits: 64
   wallCheck: {fileID: 7024310908635554467}
   groundCheckRadius: 0.2
-  sprintMultiplier: 1.5
+  sprintMultiplier: 3
   maxSpeed: 8
-  groundAcceleration: 60
-  airAcceleration: 20
-  groundLinearDrag: 5
+  groundAcceleration: 80
+  airAcceleration: 80
+  groundLinearDrag: 0
   airLinearDrag: 0
   wallCheckDistance: 0.5
   wallSlideMaxFallSpeed: 3.5
@@ -329,6 +329,8 @@ MonoBehaviour:
   fallGravityScale: 3
   apexThreshold: 0.1
   jumpCutMultiplier: 0.5
+  maxJumps: 0
+  doubleJumpForce: 12
   jumpSound: {fileID: 8300000, guid: 7f7c5b2bb7ece664d83d2299cf555e22, type: 3}
   playerAudio: {fileID: 0}
   coyoteTime: 0.15
