@@ -348,7 +348,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -8.036224, w: 0}
+  m_margin: {x: 0, y: 0, z: -8.036224, w: 148.28107}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -610,6 +610,10 @@ PrefabInstance:
     - target: {fileID: 6796628144664186246, guid: 7a2f6d8f8ef545f4eb2807ebad3e2208, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6796628145088530264, guid: 7a2f6d8f8ef545f4eb2807ebad3e2208, type: 3}
+      propertyPath: m_fontStyle
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6796628145088530264, guid: 7a2f6d8f8ef545f4eb2807ebad3e2208, type: 3}
       propertyPath: m_fontColor.b

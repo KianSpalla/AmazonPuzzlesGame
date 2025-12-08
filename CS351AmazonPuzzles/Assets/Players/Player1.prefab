@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 7024310910105167923}
   - component: {fileID: 7178757675729803597}
   - component: {fileID: 6809486030220842244}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Player1
   m_TagString: Player1
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ MonoBehaviour:
   fallGravityScale: 3
   apexThreshold: 0.1
   jumpCutMultiplier: 0.5
-  maxJumps: 1
+  maxJumps: 0
   doubleJumpForce: 10
   jumpSound: {fileID: 8300000, guid: 7f7c5b2bb7ece664d83d2299cf555e22, type: 3}
   playerAudio: {fileID: 0}
