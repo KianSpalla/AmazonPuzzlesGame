@@ -1,111 +1,84 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
 public class GoalManager : MonoBehaviour
 {
     public static bool gameOver;
-    public static string winnerName;
 
-    [Header("UI")]
-    public TMP_Text textbox;  // assign in Inspector
+    public TMP_Text textbox;
+    public string winText = "LEVEL COMPLETE!\nPress N to continue";
 
-    [Header("Co-op Goal Settings")]
-    public GameObject player1;        // assign Player 1 in Inspector
-    public GameObject player2;        // assign Player 2 in Inspector
+    public GameObject player1;
+    public GameObject player2;
 
-    // Are the players standing in the goal area?
-    private bool player1InGoal;
-    private bool player2InGoal;
+    public AudioClip winSound;
+    public string nextSceneName;
+    public bool fallbackToBuildOrder = true;
 
-    private AudioSource audioSource;
-    public AudioClip WinSound;
+    bool player1InGoal;
+    bool player2InGoal;
+    AudioSource audioSource;
 
     void Start()
     {
         gameOver = false;
-        winnerName = "";
         player1InGoal = false;
         player2InGoal = false;
+
         audioSource = GetComponent<AudioSource>();
-        Time.timeScale = 1f; // ensure unfrozen when scene starts
+        Time.timeScale = 1f;
+
+        if (textbox) textbox.text = "";
     }
 
     void Update()
     {
-        // If level not finished yet, check if both players are in the goal
         if (!gameOver)
         {
             if (player1InGoal && player2InGoal)
             {
-                // Both players reached the goal → level complete
-                audioSource.PlayOneShot(WinSound);
-                DeclareWinner("Both Players");
+                if (audioSource && winSound) audioSource.PlayOneShot(winSound);
+                gameOver = true;
+                Time.timeScale = 0f;
+                if (textbox) textbox.text = winText;
             }
             return;
         }
 
-        // show winner / level complete message
-        if (textbox)
-        {
-            textbox.text = $"{winnerName} WINS!\nPress N to Load Next Level";
-        }
-
-        // press N to load next level
         if (Input.GetKeyDown(KeyCode.N))
-        {
             LoadNextLevel();
+    }
+
+    void LoadNextLevel()
+    {
+        Time.timeScale = 1f;
+
+        if (!string.IsNullOrWhiteSpace(nextSceneName))
+        {
+            SceneManager.LoadScene(nextSceneName);
+            return;
         }
-    }
 
-    public static void DeclareWinner(string name)
-    {
-        if (gameOver) return;   // safety guard
-
-        winnerName = name;
-        gameOver = true;
-        Time.timeScale = 0f; // freeze gameplay
-    }
-
-    private void LoadNextLevel()
-    {
-        Time.timeScale = 1f; // Unfreeze before loading next level
+        if (!fallbackToBuildOrder) return;
 
         int currentIndex = SceneManager.GetActiveScene().buildIndex;
         int totalScenes = SceneManager.sceneCountInBuildSettings;
         int nextIndex = currentIndex + 1;
-
-        if (nextIndex >= totalScenes)
-        {
-            nextIndex = 0; // Wrap back to the first level if at the end
-        }
+        if (nextIndex >= totalScenes) nextIndex = 0;
 
         SceneManager.LoadScene(nextIndex);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject == player1)
-        {
-            player1InGoal = true;
-        }
-        else if (other.gameObject == player2)
-        {
-            player2InGoal = true;
-        }
+        if (other.gameObject == player1) player1InGoal = true;
+        else if (other.gameObject == player2) player2InGoal = true;
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject == player1)
-        {
-            player1InGoal = false;
-        }
-        else if (other.gameObject == player2)
-        {
-            player2InGoal = false;
-        }
+        if (other.gameObject == player1) player1InGoal = false;
+        else if (other.gameObject == player2) player2InGoal = false;
     }
 }

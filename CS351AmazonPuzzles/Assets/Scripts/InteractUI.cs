@@ -9,6 +9,8 @@ public class InteractUI : MonoBehaviour
     public GameObject player2Icon;
     public GameObject player1IconPressed;
     public GameObject player2IconPressed;
+    public GameObject LeverNeutral;
+    public GameObject LeverNeutralPressed;
 
     [Header("Key Bindings")]
     public KeyCode player1Key = KeyCode.E;
