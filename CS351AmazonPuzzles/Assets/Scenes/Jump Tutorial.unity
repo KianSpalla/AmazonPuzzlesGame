@@ -3351,7 +3351,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4153584120395086483, guid: 65c0d9399a950b64cadc86f29de3ce95, type: 3}
       propertyPath: sentences.Array.data[0]
-      value: To Jump, Use W for Player1, and P for Player2
+      value: To Jump, Use W for Player1, and UpArrow for Player2
       objectReference: {fileID: 0}
     - target: {fileID: 4153584120395086483, guid: 65c0d9399a950b64cadc86f29de3ce95, type: 3}
       propertyPath: sentences.Array.data[1]

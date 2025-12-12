@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
     [Header("Audio")]
     public AudioClip jumpSound;
     public AudioSource playerAudio;
+    public AudioClip runSound;
 
     // Internals
     private Rigidbody2D rb;
@@ -74,6 +75,7 @@ public class PlayerController : MonoBehaviour
     [Header("Coyote Time")]
     public float coyoteTime = 0.15f;
     private float coyoteTimeCounter;
+    private bool isPlayingRunSound = false;
 
     void Start()
     {
@@ -84,6 +86,26 @@ public class PlayerController : MonoBehaviour
         if (!wallCheck) Debug.LogError("wallCheck not assigned on " + name);
         if (!rb) Debug.LogError("Rigidbody2D missing on " + name);
         jumpsRemaining = maxJumps;
+        // --- Run sound logic ---
+        if (isGrounded && Mathf.Abs(horizontalInput) > 0f)
+        {
+            if (!isPlayingRunSound && playerAudio && runSound)
+            {
+                playerAudio.clip = runSound;
+                playerAudio.loop = true;
+                playerAudio.Play();
+                isPlayingRunSound = true;
+            }
+        }
+        else
+        {
+            if (isPlayingRunSound && playerAudio)
+            {
+                playerAudio.Stop();
+                playerAudio.loop = false;
+                isPlayingRunSound = false;
+            }
+        }
 
     }
 

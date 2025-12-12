@@ -175,6 +175,7 @@ GameObject:
   - component: {fileID: 1339599030092685912}
   - component: {fileID: 688194991569683797}
   - component: {fileID: 2275159428394825916}
+  - component: {fileID: 2057823343}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player2
@@ -198,6 +199,7 @@ Transform:
   - {fileID: 1339599029870379455}
   - {fileID: 7132211835540631818}
   - {fileID: 159254638121760462}
+  - {fileID: 5375273266778544468}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -333,8 +335,9 @@ MonoBehaviour:
   jumpCutMultiplier: 0.5
   maxJumps: 0
   doubleJumpForce: 0
-  jumpSound: {fileID: 8300000, guid: 7f7c5b2bb7ece664d83d2299cf555e22, type: 3}
+  jumpSound: {fileID: 8300000, guid: 88027066ee2ae464c923b63e307fb4a7, type: 3}
   playerAudio: {fileID: 0}
+  runSound: {fileID: 8300000, guid: ae7290df320e3e146ae5c2313d214e3f, type: 3}
   coyoteTime: 0.15
 --- !u!95 &1339599030092685913
 Animator:
@@ -495,8 +498,26 @@ MonoBehaviour:
   player2: {fileID: 1339599030092685907}
   stackJumpWindow: 0.15
   jumpBuffer: 0.15
-  player1JumpMultiplier: 0.5
+  player1JumpMultiplier: 0.25
   player2ExtraBoost: 6
+--- !u!114 &2057823343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339599030092685904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 254132414318e044499ef0b176b2cff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chainLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  climbSpeed: 4
+  checkRadius: 0.75
+  climbCheck: {fileID: 5375273266778544468}
 --- !u!1 &2081450028477885375
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,6 +565,36 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
+--- !u!1 &3514356160464339426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5375273266778544468}
+  m_Layer: 0
+  m_Name: ClimbCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5375273266778544468
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3514356160464339426}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.059, y: 0.503, z: -9.027816}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1339599030092685911}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9164442821244334715
 GameObject:
   m_ObjectHideFlags: 0

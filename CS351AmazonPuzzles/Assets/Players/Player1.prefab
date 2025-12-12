@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4910608604413204581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2001669167231942524}
+  m_Layer: 0
+  m_Name: ClimbCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2001669167231942524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4910608604413204581}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.063, y: 0.486, z: -32.164097}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7024310910105167932}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7024310908635554466
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,6 +205,7 @@ GameObject:
   - component: {fileID: 7024310910105167923}
   - component: {fileID: 7178757675729803597}
   - component: {fileID: 6809486030220842244}
+  - component: {fileID: 1726992016}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player1
@@ -197,6 +228,7 @@ Transform:
   - {fileID: 7024310908635554467}
   - {fileID: 7024310909798976468}
   - {fileID: 3406178394321744254}
+  - {fileID: 2001669167231942524}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -332,8 +364,9 @@ MonoBehaviour:
   jumpCutMultiplier: 0.5
   maxJumps: 0
   doubleJumpForce: 10
-  jumpSound: {fileID: 8300000, guid: 7f7c5b2bb7ece664d83d2299cf555e22, type: 3}
+  jumpSound: {fileID: 8300000, guid: 88027066ee2ae464c923b63e307fb4a7, type: 3}
   playerAudio: {fileID: 0}
+  runSound: {fileID: 8300000, guid: ae7290df320e3e146ae5c2313d214e3f, type: 3}
   coyoteTime: 0.15
 --- !u!95 &7024310910105167922
 Animator:
@@ -490,6 +523,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c6cf7a6cda7ccf40a758ef20145908b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1726992016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7024310910105167931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 254132414318e044499ef0b176b2cff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chainLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  climbSpeed: 4
+  checkRadius: 0.75
+  climbCheck: {fileID: 2001669167231942524}
 --- !u!1 &8453157239923227094
 GameObject:
   m_ObjectHideFlags: 0
